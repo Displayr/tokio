@@ -33,7 +33,6 @@ full = [
   "io-std",
   "macros",
   "net",
-  "parking_lot",
   "process",
   "rt",
   "rt-multi-thread",
@@ -43,6 +42,10 @@ full = [
 ]
 
 fs = ["libc"]
+# Disable this feature optimization 
+# we have to do this because other libraries which depend on this feature require 
+# this feature but parking_lot was causing weird crashes when interacting with tensorflow.
+parking_lot = []
 io-util = ["memchr", "bytes"]
 # stdin, stdout, stderr
 io-std = []
@@ -95,7 +98,6 @@ once_cell = { version = "1.5.2", optional = true }
 memchr = { version = "2.2", optional = true }
 mio = { version = "0.7.6", optional = true }
 num_cpus = { version = "1.8.0", optional = true }
-parking_lot = { version = "0.11.0", optional = true }
 
 # Currently unstable. The API exposed by these features may be broken at any time.
 # Requires `--cfg tokio_unstable` to enable.

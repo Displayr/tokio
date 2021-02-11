@@ -106,8 +106,8 @@ impl<T> OnceCell<T> {
     }
 
     /// Creates a new uninitialized OnceCell instance.
-    #[cfg(all(feature = "parking_lot", not(all(loom, test)),))]
-    #[cfg_attr(docsrs, doc(cfg(feature = "parking_lot")))]
+    #[cfg(all(feature = "parking_lot_disabled", not(all(loom, test)),))]
+    #[cfg_attr(docsrs, doc(cfg(feature = "parking_lot_disabled")))]
     pub const fn const_new() -> Self {
         OnceCell {
             value_set: AtomicBool::new(false),

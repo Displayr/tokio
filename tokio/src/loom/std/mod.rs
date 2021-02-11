@@ -7,7 +7,7 @@ mod atomic_u64;
 mod atomic_u8;
 mod atomic_usize;
 mod mutex;
-#[cfg(feature = "parking_lot")]
+#[cfg(feature = "parking_lot_disabled")]
 mod parking_lot;
 mod unsafe_cell;
 
@@ -53,17 +53,17 @@ pub(crate) mod sync {
     // internal use. Note however that some are not _currently_ named by
     // consuming code.
 
-    #[cfg(feature = "parking_lot")]
+    #[cfg(feature = "parking_lot_disabled")]
     #[allow(unused_imports)]
     pub(crate) use crate::loom::std::parking_lot::{
         Condvar, Mutex, MutexGuard, RwLock, RwLockReadGuard, WaitTimeoutResult,
     };
 
-    #[cfg(not(feature = "parking_lot"))]
+    #[cfg(not(feature = "parking_lot_disabled"))]
     #[allow(unused_imports)]
     pub(crate) use std::sync::{Condvar, MutexGuard, RwLock, RwLockReadGuard, WaitTimeoutResult};
 
-    #[cfg(not(feature = "parking_lot"))]
+    #[cfg(not(feature = "parking_lot_disabled"))]
     pub(crate) use crate::loom::std::mutex::Mutex;
 
     pub(crate) mod atomic {
